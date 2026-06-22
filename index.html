@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSS | Master Materiality Manual v18.0 (Final)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;300;400;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Superficies Abisales y Materialidad */
+            --lss-abyssal: #020203; 
+            --lss-base: #0e0f1c; 
+            
+            /* Tipografía Optimizada (Presbicia y Elegancia) */
+            --lss-text-primary: #dfebeb; 
+            --lss-text-secondary: #a3b2b8; 
+            --lss-text-muted: rgba(198, 222, 222, 0.5); 
+
+            /* Los Absolutos */
+            --lss-absolute-white: #ffffff;
+
+            /* Espectros Cromáticos */
+            --lss-e-blue-3: #2c3263; --lss-e-blue-4: #384080; --lss-e-ice: #c6dede;
+            --lss-c1: #1a1a2b; --lss-c2: #24284b; --lss-c3: #394182;
+            --lss-c4: #c85343; --lss-c5: #ec7e0a; --lss-c6: #fbb264;
+            --lss-c7: #c5dede; --lss-c8: #fdd6b1; --lss-c9: #feebda;
+            --lss-token-critical: #c75043; 
+
+            /* Familias Tipográficas */
+            --font-display: 'Urbanist', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+
+            /* Grano del papel de algodón (Calibrado a opacidad 0.055) */
+            --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.055'/%3E%3C/svg%3E");
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+        
+        body { 
+            background-color: var(--lss-abyssal); 
+            color: var(--lss-text-primary); 
+            font-family: var(--font-body); 
+            line-height: 1.618;
+            padding: 5rem 2rem;
+        }
+
+        .container { max-width: 1050px; margin: 0 auto; }
+
+        .section { margin-bottom: 8rem; }
+
+        /* ==========================================================
+           01. TÍTULO DE MARCA MAESTRO (RESTAURADO)
+           ========================================================== */
+        .master-brand-title {
+            text-align: center;
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        .lean-star-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin: 0;
+            display: inline-block;
+            /* Mayúsculas forzadas removidas según instrucción */
+        }
+
+        /* Peso ajustado: Fuerte pero no sobrecargado (700 en lugar de 900) */
+        .lean-star-title strong { 
+            font-weight: 700; 
+            color: var(--lss-text-primary);
+        }
+
+        /* Flujo fluido y elegante */
+        .lean-star-title span { 
+            font-weight: 600; 
+            background: linear-gradient(to right, var(--lss-c1), var(--lss-c5), var(--lss-c7), var(--lss-c2));
+            -webkit-background-clip: text;
+            color: transparent;
+            background-size: 300% auto;
+            animation: masterFlow 12s ease-in-out infinite;
+        }
+
+        @keyframes masterFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ==========================================================
+           02. DINÁMICA DE FRANJAS (VECTORES INFLEXIBLES)
+           ========================================================== */
+        .stripe-box { 
+            background: rgba(17, 15, 36, 0.3); border: 1px solid rgba(198, 222, 222, 0.05);
+            padding: 2.5rem; margin-bottom: 2rem;
+        }
+
+        .lss-stripe-bar { width: 100%; height: 4px; background-size: 200% auto; margin-bottom: 1.5rem; }
+
+        @keyframes visualLeft { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        @keyframes visualRight { 0% { background-position: 200% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* Matriz -> Reversa Exclusiva (←) - Velocidad 8s */
+        .stripe-bar-master {
+            background-image: linear-gradient(to right, var(--lss-c1), var(--lss-c2), var(--lss-c3), var(--lss-c4), var(--lss-c5), var(--lss-c6), var(--lss-c7), var(--lss-c8), var(--lss-c9), var(--lss-c1));
+            animation: visualLeft 8s linear infinite;
+        }
+
+        /* Enterprise -> Avance (→) - Velocidad 15s */
+        .stripe-bar-enterprise {
+            background-image: linear-gradient(to right, var(--lss-e-blue-3), var(--lss-e-blue-4), var(--lss-e-ice), var(--lss-e-blue-4), var(--lss-e-blue-3));
+            animation: visualRight 15s linear infinite; 
+            box-shadow: 0 0 20px rgba(56, 64, 128, 0.2);
+        }
+
+        /* ==========================================================
+           03. MATERIALIDAD BASE: PAPEL Y ENGRABADO CIEGO
+           ========================================================== */
+        .paper-card {
+            background-color: var(--lss-base);
+            background-image: radial-gradient(circle at top left, rgba(255,255,255,0.015), transparent 70%), var(--paper-grain);
+            position: relative;
+            padding: 4rem 3.5rem;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.02);
+            margin-bottom: 4rem;
+            overflow: hidden; 
+        }
+
+        /* Engrabado Ciego (Deboss) - Fino y sofisticado */
+        .paper-card::after {
+            content: "LEAN STAR"; 
+            position: absolute;
+            bottom: 24px;
+            right: 32px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 11px; 
+            letter-spacing: 5px;
+            color: #06060c; 
+            text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.9), 1px 1px 1px rgba(255, 255, 255, 0.08); 
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* ==========================================================
+           04. INCISIÓN LÁSER (ESTADOS SEMÁNTICOS)
+           ========================================================== */
+        .aegis-laser {
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background-size: 200% auto; z-index: 5;
+        }
+
+        .aegis-laser.nominal {
+            background-image: linear-gradient(to right, var(--lss-e-blue-3), var(--lss-e-ice), var(--lss-e-blue-4), var(--lss-e-ice), var(--lss-e-blue-3));
+            animation: visualRight 15s linear infinite;
+            opacity: 0.5;
+        }
+
+        .aegis-laser.critical {
+            background-image: linear-gradient(to right, var(--lss-token-critical), #e86455, var(--lss-token-critical));
+            box-shadow: 0 0 15px var(--lss-token-critical);
+            animation: laserStrobe 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes laserStrobe {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px var(--lss-token-critical); }
+            50% { opacity: 0.3; box-shadow: 0 0 5px var(--lss-token-critical); }
+        }
+
+        /* ==========================================================
+           05. PROTECCIÓN ESTRUCTURAL DE DATOS (TABLA)
+           ========================================================== */
+        .aegis-table { display: table; width: 100%; table-layout: fixed; position: relative; z-index: 2; }
+        .aegis-row { display: table-row; }
+        .aegis-cell { display: table-cell; vertical-align: middle; white-space: nowrap; }
+
+        .lbl-large { 
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            color: var(--lss-text-secondary); letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 1rem; display: block; white-space: nowrap;
+        }
+
+        .val-large { 
+            font-family: var(--font-display); font-size: 3.5rem; font-weight: 300; 
+            line-height: 1; color: var(--lss-text-primary); white-space: nowrap;
+        }
+
+        .val-large.critical { 
+            color: var(--lss-token-critical); font-weight: 700;
+            text-shadow: 0 0 40px rgba(197, 80, 67, 0.2); 
+        }
+
+        /* ==========================================================
+           06. INGENIERÍA DE PERFORACIONES FÍSICAS
+           ========================================================== */
+
+        /* Modelo 1: Tracción Continua (Tractor Feed) */
+        .card-tractor { padding-left: 6rem; padding-right: 6rem; }
+        .tractor-holes {
+            position: absolute; top: 0; bottom: 0; width: 3rem;
+            background-image: repeating-radial-gradient(circle at center, var(--lss-abyssal) 0, var(--lss-abyssal) 4px, transparent 5px, transparent 100%);
+            background-size: 100% 2.5rem; z-index: 1;
+        }
+        .tractor-holes.left { left: 0; border-right: 1px solid rgba(255,255,255,0.02); }
+        .tractor-holes.right { right: 0; border-left: 1px solid rgba(255,255,255,0.02); }
+
+        /* Modelo 2: Sistema Kardex (Rod Lock Inferior) */
+        .card-kardex { padding-bottom: 6rem; }
+        .kardex-rod {
+            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+            width: 1.5rem; height: 1.5rem; border-radius: 50%; background-color: var(--lss-abyssal);
+            box-shadow: inset 0 3px 6px rgba(0,0,0,1), 0 1px 0 rgba(255,255,255,0.05); z-index: 1;
+        }
+        .kardex-slit {
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0.25rem; height: 1.8rem; background-color: var(--lss-abyssal);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,1); z-index: 1;
+        }
+
+        /* Modelo 3: Sistema McBee (Edge-Notched Superior) */
+        .card-mcbee { padding-top: 6rem; }
+        .mcbee-holes {
+            position: absolute; top: 1.5rem; left: 3rem; right: 3rem; height: 1rem;
+            background-image: repeating-radial-gradient(circle at 1rem 50%, var(--lss-abyssal) 0, var(--lss-abyssal) 5px, transparent 6px, transparent 3rem);
+            z-index: 1;
+        }
+        .mcbee-notch {
+            position: absolute; top: 0; width: 0.8rem; height: 2rem;
+            background-color: var(--lss-abyssal); border-radius: 0 0 1rem 1rem;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,1), 0 1px 0 rgba(255,255,255,0.05); z-index: 2;
+        }
+
+        /* Modelo 4: Matriz Hollerith (IBM Punch Card) */
+        .hollerith-block {
+            position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+            display: flex; gap: 6px; opacity: 0.5; z-index: 1;
+        }
+        .h-col { display: flex; flex-direction: column; gap: 8px; }
+        .h-hole {
+            width: 8px; height: 20px; background-color: var(--lss-abyssal);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,1); border-radius: 1px;
+        }
+        .h-hole.empty { background-color: transparent; box-shadow: none; border: 1px solid rgba(198,222,222,0.1); }
+
+        /* ==========================================================
+           07. EL ORÁCULO ABSOLUTO
+           ========================================================== */
+        .oracle-data {
+            font-family: var(--font-display); font-size: 9rem; font-weight: 200;
+            color: var(--lss-e-ice); cursor: pointer;
+            transition: color 5s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 5s ease;
+        }
+        .oracle-data.achieved {
+            transition: color 0.08s ease-in;
+            color: var(--lss-absolute-white) !important;
+            text-shadow: 0 0 50px #fff, 0 0 100px rgba(255,255,255,0.3);
+        }
+        .mono-caption { font-family: var(--font-mono); font-size: 12px; color: var(--lss-e-blue-4); letter-spacing: 4px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="master-brand-title">
+            <span class="mono-caption" style="margin-bottom: 1.5rem; display: block;">[ MAIN IDENTITY SYSTEM ]</span>
+            <h1 class="lean-star-title"><strong>Lean</strong> <span>Star</span></h1>
+        </header>
+
+        <section class="section">
+            <h2 style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--lss-text-muted); text-transform: uppercase; letter-spacing: 1px;">01. Dinámica de Flujos</h2>
+            
+            <div class="stripe-box">
+                <div class="lss-stripe-bar stripe-bar-master"></div>
+                <span class="lbl-large">Lean Star Solutions (Matriz)</span>
+                <p style="margin: 0; color: var(--lss-text-secondary); font-size: 0.9rem;">Integración total de telemetría. Ciclo de animación en reversa adaptado a 8s.</p>
+            </div>
+
+            <div class="stripe-box">
+                <div class="lss-stripe-bar stripe-bar-enterprise"></div>
+                <span class="lbl-large" style="color: var(--lss-e-ice);">LSS Enterprise (C-Suite)</span>
+                <p style="margin: 0; color: var(--lss-text-secondary); font-size: 0.9rem;">Estabilidad institucional inercial. Ciclo de animación en avance adaptado a 15s.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--lss-text-muted); text-transform: uppercase; letter-spacing: 1px;">02. Fisiología Documental (Nodos Físicos)</h2>
+            
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--lss-text-secondary);"><strong>Modelo 01: Tracción Continua (Mainframe)</strong>. Agujeros de arrastre en los márgenes laterales.</p>
+            <div class="paper-card card-tractor">
+                <div class="tractor-holes left"></div>
+                <div class="tractor-holes right"></div>
+                <div class="aegis-laser nominal"></div>
+                <div class="aegis-table">
+                    <div class="aegis-row">
+                        <div class="aegis-cell" style="width: 35%;">
+                            <span class="lbl-large">Capital Recuperado</span>
+                            <div class="val-large">$14.2M</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 35%; padding-left: 1rem;">
+                            <span class="lbl-large">Estado Operativo</span>
+                            <div class="val-large" style="font-size: 1.4rem; font-family: var(--font-mono); color: var(--lss-e-ice); margin-top: 1.2rem;">[ SILENT_MODE ]</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 30%; border-left: 1px solid rgba(198,222,222,0.06); padding-left: 3rem;">
+                            <span class="lbl-large" style="color: var(--lss-text-secondary);">Eficiencia</span>
+                            <div class="val-large">98.5%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--lss-text-secondary);"><strong>Modelo 02: Sistema Kardex (Rod Lock)</strong>. Ojo de cerradura y ranura inferior para anclaje a gaveta maestra.</p>
+            <div class="paper-card card-kardex">
+                <div class="kardex-rod"></div>
+                <div class="kardex-slit"></div>
+                <div class="aegis-laser nominal"></div>
+                <div class="aegis-table">
+                    <div class="aegis-row">
+                        <div class="aegis-cell" style="width: 35%;">
+                            <span class="lbl-large">Fondo de Reserva</span>
+                            <div class="val-large">$3.8M</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 35%; padding-left: 1rem;">
+                            <span class="lbl-large">Flujo de Datos</span>
+                            <div class="val-large" style="font-size: 1.4rem; font-family: var(--font-mono); color: var(--lss-e-ice); margin-top: 1.2rem;">[ SYNC_ACTIVE ]</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 30%; border-left: 1px solid rgba(198,222,222,0.06); padding-left: 3rem;">
+                            <span class="lbl-large" style="color: var(--lss-text-secondary);">Resolución</span>
+                            <div class="val-large">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--lss-text-secondary);"><strong>Modelo 03: Clasificación McBee (Edge-Notched)</strong>. Muescas perforadas en el borde superior indicando alerta.</p>
+            <div class="paper-card card-mcbee">
+                <div class="mcbee-holes"></div>
+                <div class="mcbee-notch" style="left: 7rem;"></div>
+                <div class="mcbee-notch" style="left: 13rem;"></div>
+                <div class="aegis-laser critical"></div>
+                <div class="aegis-table">
+                    <div class="aegis-row">
+                        <div class="aegis-cell" style="width: 35%;">
+                            <span class="lbl-large">Capital Comprometido</span>
+                            <div class="val-large">$1.4M</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 35%; padding-left: 1rem;">
+                            <span class="lbl-large">Alertas Globales</span>
+                            <div class="val-large" style="font-size: 1.4rem; font-family: var(--font-mono); color: var(--lss-token-critical); margin-top: 1.2rem;">[ ACTION_REQUIRED ]</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 30%; border-left: 1px solid rgba(197, 80, 67, 0.2); padding-left: 3rem;">
+                            <span class="lbl-large" style="color: var(--lss-token-critical);">Pérdida Crítica</span>
+                            <div class="val-large critical">-$850K</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--lss-text-secondary);"><strong>Modelo 04: Matriz Hollerith (IBM 80-col)</strong>. Bloque incrustado de micro-perforaciones rectangulares para encriptación.</p>
+            <div class="paper-card" style="padding-right: 12rem;">
+                <div class="hollerith-block">
+                    <div class="h-col"><div class="h-hole"></div><div class="h-hole empty"></div><div class="h-hole"></div><div class="h-hole empty"></div></div>
+                    <div class="h-col"><div class="h-hole empty"></div><div class="h-hole"></div><div class="h-hole"></div><div class="h-hole empty"></div></div>
+                    <div class="h-col"><div class="h-hole"></div><div class="h-hole"></div><div class="h-hole empty"></div><div class="h-hole"></div></div>
+                </div>
+                <div class="aegis-laser nominal"></div>
+                <div class="aegis-table">
+                    <div class="aegis-row">
+                        <div class="aegis-cell" style="width: 40%;">
+                            <span class="lbl-large">Índice de Entropía</span>
+                            <div class="val-large">0.02%</div>
+                        </div>
+                        <div class="aegis-cell" style="width: 60%; border-left: 1px solid rgba(198,222,222,0.06); padding-left: 3rem;">
+                            <span class="lbl-large" style="color: var(--lss-text-secondary);">Código de Máquina</span>
+                            <div class="val-large" style="font-size: 1.4rem; font-family: var(--font-mono); color: var(--lss-text-secondary); margin-top: 1.2rem;">0x7F_SECURE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section" style="text-align: center;">
+            <h2 style="font-size: 1.2rem; margin-bottom: 4rem; color: var(--lss-text-muted); text-transform: uppercase; letter-spacing: 1px;">03. El Oráculo (Hito Absoluto)</h2>
+            <div class="oracle-data" id="target" onclick="triggerGlow()">
+                0.00%
+            </div>
+            <p class="mono-caption" style="margin-top: 3rem;">Haga clic para ejecutar pulso de resolución operativa</p>
+        </section>
+
+    </div>
+
+    <script>
+        function triggerGlow() {
+            const el = document.getElementById('target');
+            el.classList.add('achieved');
+            setTimeout(() => { el.classList.remove('achieved'); }, 150);
+        }
+    </script>
+</body>
+</html>
